@@ -1,23 +1,31 @@
-import logo from './logo.svg';
-import './App.css';
+import "./App.css";
+import Navbar from "./components/navbar/Navbar";
+import { Routes, Route, Navigate } from "react-router-dom";
+import SafesPage from "./pages/SafesPage/SafesPage";
+import VaultPage from "./pages/VaultPage/VaultPage";
+import ServicePage from "./pages/ServicePage/ServicePage";
+import IamPage from "./pages/IamPage/IamPage";
+import AzurePage from "./pages/AzurePage/AzurePage";
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <Navbar />
+      <Routes>
+      <Route index path="/safes" element={<SafesPage/>}>
+        </Route>
+        <Route path="/vault" element={<VaultPage/>}>
+        </Route>
+        <Route path="/service" element={<ServicePage />}>
+        </Route>
+        <Route path="/iam" element={<IamPage />}>
+        </Route>
+        <Route path="/azure" element={<AzurePage />}>
+        </Route>
+        <Route path="/" element={<Navigate to="/safes"/>}>
+        </Route>
+        
+      </Routes>
     </div>
   );
 }
