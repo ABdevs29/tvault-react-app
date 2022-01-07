@@ -6,22 +6,23 @@ const reducer = (initialState = [], action) => {
       counter++;
       return [
         ...initialState.map((el) => {
-            return {...el, select: false}
+          return { ...el, select: false };
         }),
         {
           id: counter,
           ...action.payload,
           createdAt: new Date(),
           select: true,
-          secrets: []
+          secrets: [],
         },
       ];
     case "EDIT_SAFE":
       return initialState.map((el) => {
+        console.log(action.payload, "action.payload")
         if (el.id === action.payload.id) {
-          return { ...action.payload, createdAt: new Date() };
+          return { ...action.payload, createdAt: new Date(), select: true };
         } else {
-          return el;
+          return {...el, select: false};
         }
       });
     case "DELETE_SAFE":
@@ -35,17 +36,32 @@ const reducer = (initialState = [], action) => {
         if (el.id == action.payload) {
           return { ...el, select: true };
         } else {
-            return { ...el, select: false };
+          return { ...el, select: false };
         }
       });
-      case "ADD_SECRETS":
-        return initialState.map((el) => {
-            if (el.select === true) {
-              return { ...el, secrets: [...el.secrets, {...action.payload}] };
-            } else {
-              return el;
+    case "ADD_SECRETS":
+      return initialState.map((el) => {
+        if (el.select === true) {
+          return { ...el, secrets: [...el.secrets, { ...action.payload }] };
+        } else {
+          return el;
+        }
+      });
+    case "DELETE_SECRETS":
+      return initialState.map((el) => {
+        if (el.select === true) {
+          console.log(el);
+          return {...el, secrets: el.secrets.filter((secret) => {
+            console.log(secret);
+            if (secret.id !== action.payload) {
+              console.log(secret);
+              return secret;
             }
-          });
+          }) }
+        } else {
+          return el;
+        }
+      });
     default:
       return initialState;
   }

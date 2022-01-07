@@ -18,7 +18,8 @@ const Modal = ({
   setSafeDesc,
   setSelect,
   setShowName,
-  setShowDesc
+  setShowDesc,
+  setFilteredArray
 }) => {
   const showHideClassName = show ? "modal display-block" : "modal display-none";
   const buttonEnabled = safeName=="" || safeOwner=="" || safeType=="" || safeDesc.length < 10 ? "btn-disabled" : "btn-enabled";
@@ -31,7 +32,7 @@ const Modal = ({
     console.log(safeName, safeOwner, safeType, safeDesc);
     setSelect(true);
     setShowName(safeName);
-    setShowDesc(safeDesc)
+    setShowDesc(safeDesc);
     const payload = {
       safeName,
       safeOwner,
@@ -44,10 +45,13 @@ const Modal = ({
     setSafeOwner("");
     setSafeType("Personal");
     setSafeDesc("");
+    setFilteredArray([...safesList.safesList])
   };
 
   const handleEditData = (id) => {
     console.log(safeName, safeOwner, safeType, safeDesc);
+    setShowName(safeName);
+    setShowDesc(safeDesc);
     const payload = {
       id,
       safeName,
@@ -55,6 +59,7 @@ const Modal = ({
       safeType,
       safeDesc,
     };
+    console.log(payload, "payload")
     dispatch({ type: "EDIT_SAFE", payload });
     handleClose();
     setSafeName("");
@@ -120,7 +125,7 @@ const Modal = ({
         </div>
         <p id="desc-validation">Please add minimum of 10 characters</p>
         <div className="close-create-box">
-          <button type="button" onClick={handleClose} id="close-btn">
+          <button type="button" onClick={handleClose} className="close-btn">
             Close
           </button>
           {edit ? (

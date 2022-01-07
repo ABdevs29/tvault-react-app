@@ -4,15 +4,21 @@ import addBtn from "../../images/add.png";
 import addSecretsBtnDisabled from "../../images/add-folder.png";
 import addSecretsBtnEnabled from "../../images/add-folder-active.png";
 import secretIcon from "../../images/secret.png";
-import safeIcon from "../../images/safe-icon.png";
-import editIcon from "../../images/edit.png";
+import secretFolderIcon from "../../images/folder.png";
+import secretFolderActiveIcon from "../../images/folder-active.png";
 import deleteIcon from "../../images/delete.png";
 import "./SafesPage.css";
 import Modal from "../../components/navbar/Modal/Modal";
+import ModalTemp from "../../components/navbar/ModalTemplate/ModalTemp";
+
 import { useDispatch, useSelector } from "react-redux";
+import SecretsModal from "./SecretsModal/SecretsModal";
+import SafesCardTemplate from "./SafesCardTemplate";
 
 function SafesPage() {
   const [modalOpen, setModalOpen] = useState(false);
+  const [modalTempOpen, setModalTempOpen] = useState(false);
+  const [secretsPresent, setsecretsPresent] = useState(false);
   const [editId, setEditId] = useState(0);
   const [deleteId, setDeleteId] = useState(0);
   const [edit, setEdit] = useState(false);
@@ -22,12 +28,13 @@ function SafesPage() {
   const [safeType, setSafeType] = useState("");
   const [safeDesc, setSafeDesc] = useState("");
   const [showDesc, setShowDesc] = useState("");
+  const [search, setSearch] = useState("");
   const [select, setSelect] = useState(false);
 
-
   const safesList = useSelector((safesList) => safesList);
+  const [filteredArray, setFilteredArray] = useState([...safesList.safesList])
+  // console.log(safesList);
   const dispatch = useDispatch();
-  
 
   const handleModalOpen = () => {
     setSafeName("");
@@ -39,11 +46,18 @@ function SafesPage() {
   const hideModal = () => {
     setModalOpen(false);
   };
+  const handleModalTempOpen = () => {
+    setModalTempOpen(true);
+  };
+  const hideModalTemp = () => {
+    setModalTempOpen(false);
+  };
 
   const handleEditSafe = (id) => {
     setEditId(id);
     setEdit(true);
-    const result = safesList.safesList.filter((el)=> el.id== id);
+    // setSelect(true);
+    const result = safesList.safesList.filter((el) => el.id == id);
     setSafeName(result[0].safeName);
     setSafeOwner(result[0].safeOwner);
     setSafeType(result[0].safeType);
@@ -57,30 +71,54 @@ function SafesPage() {
     setDeleteId(id);
     setEdit(false);
     setSelect(false);
+    setShowName("");
+    setShowDesc("");
     console.log(id);
     // const result = safesList.safesList.filter((el)=> el.id!== id);
     const payload = id;
     dispatch({ type: "DELETE_SAFE", payload });
-
   };
 
   const handleSelectSafe = (id) => {
-    console.log(id)
+    // console.log(id);
     setSelect(true);
-    const result = safesList.safesList.filter((el)=> el.id== id);
+    const result = safesList.safesList.filter((el) => el.id == id);
     setShowName(result[0].safeName);
     setShowDesc(result[0].safeDesc);
     const payload = id;
     dispatch({ type: "SELECT_SAFE", payload });
+  };
+
+  const handleDeleteSecret = (id) => {
+    console.log(id);
+    const payload = id;
+    dispatch({ type: "DELETE_SECRETS", payload });
   }
 
+  const filter = (data, value) => {
+    if (value == "") {
+      setFilteredArray(data.safesList);
+    } else {
+      const result = [...data.safesList.filter((el) => {
+        if (el.safeName.toLowerCase().includes(value)) {
+          el.select = true;
+        console.log(el)
+          return el;
+        } else {
+          el.select = false;
+        }
+      })]
+      setFilteredArray(result);
+    }
+  }
+  // const safesList.safesList = filter(safesList.safesList, search.toLowerCase());
   return (
     <main className="safe-page-container">
       <article className="display-safes">
         <section>
           <div className="display-safes-all-safes">
             <p>
-              All Safes <span>({safesList.safesList.length})</span>
+              All Safes <span>({search == "" ? safesList?.safesList?.length : filteredArray?.length})</span>
             </p>
             <div className="search-container">
               <img
@@ -93,10 +131,13 @@ function SafesPage() {
                 name="search-box-input"
                 id="search-box-input"
                 placeholder="Search"
+                value={search}
+                onChange={(e) => {filter(safesList, e.target.value); setSearch(e.target.value);}}
+
               />
             </div>
           </div>
-          {safesList.safesList.length == 0 ? (
+          {safesList?.safesList?.length == 0 ? (
             <div className="safe-image-text">
               <img src={safe} alt="safe" id="safe-image" />
               Create a safe and get started!
@@ -110,40 +151,29 @@ function SafesPage() {
           ) : (
             <div>
               <div className="safe-list-display-card-container">
-                {safesList.safesList.map((el) => {
+              {
+                console.log(filteredArray)
+              }
+                {search=="" ? safesList.safesList.map((el) => {
+                  
                   return (
-                    <div className={el.select ? "safe-list-display-card-select" : "safe-list-display-card"} key={el.id} onClick={() => handleSelectSafe(el.id)}>
-                      <img src={safeIcon} alt="safe icon" id="safeIcon" />
-                      <div className="safe-list-name-display-box">
-                        <div>{el.safeName}</div>
-                        <div id="last-updated">
-                          Last Updated: few seconds ago
-                        </div>
-                      </div>
-                      <div className="edit-delete-container">
-                        <img
-                          src={editIcon}
-                          alt="edit icon"
-                          id="editIcon"
-                          onClick={() => handleEditSafe(el.id)}
-                        />
-                        <img
-                          src={deleteIcon}
-                          alt="delete icon"
-                          id="deleteIcon"
-                          onClick={() => handleDeleteSafe(el.id)}
-                        />
-                      </div>
-                    </div>
+                    <SafesCardTemplate el={el} handleSelectSafe={handleSelectSafe} handleEditSafe={handleEditSafe} setSelect={setSelect} handleDeleteSafe={handleDeleteSafe} />
                   );
-                })}
+                }) : filteredArray?.length == 0 ? <div className="not-found-text">No Safe found!</div> :filteredArray.map((el) => {
+                  return (
+                    <SafesCardTemplate el={el} handleSelectSafe={handleSelectSafe} handleEditSafe={handleEditSafe} setSelect={setSelect} handleDeleteSafe={handleDeleteSafe} />
+                  );
+                }) }
               </div>
               <div className="add-btn-container">
                 <img
                   src={addBtn}
                   alt="add"
                   id="add-btn-image"
-                  onClick={() => {setEdit(false); handleModalOpen();}}
+                  onClick={() => {
+                    setEdit(false);
+                    handleModalOpen();
+                  }}
                 />
               </div>
             </div>
@@ -152,28 +182,100 @@ function SafesPage() {
       </article>
       <article className="display-secrets">
         <div className="safes-display-banner">
-          <div className="safes-display-caption">{select ? showName :"No Safes Created Yet"}</div>
+          <div className="safes-display-caption">
+            {select && safesList?.safesList?.length !== 0  ? showName : "No Safes Created Yet"}
+          </div>
           <div className="safes-display-para">
-          {select ? showDesc :"Create a safe to see your secrets, folders and perm"}
+            {select && safesList?.safesList?.length !== 0 
+              ? showDesc
+              : "Create a safe to see your secrets, folders and perm"}
           </div>
         </div>
         <section className="secrets-display-box">
-          <div className="secrets-display-box-banner">
+          <div className="secrets-display-box-banner"> 
             <div>Secrets</div>
             <div>
-              <img src={select ? addSecretsBtnEnabled : addSecretsBtnDisabled} alt="add-folder" id="addSecretsBtn" disabled={!select}  onClick={!select ? null : () => console.log("Hello")}/>
+              <img
+                src={select && safesList?.safesList?.length !==0 ? addSecretsBtnEnabled : addSecretsBtnDisabled}
+                alt="add-folder"
+                id="addSecretsBtn"
+                disabled={!select}
+                onClick={!select ? null : () => handleModalTempOpen()}
+              />
             </div>
           </div>
           <div>
-            <div className="zero-secrets">0 Secrets</div>
-            <div className="secrets-list-box">
-              <img src={secretIcon} alt="secret-Icon" id="secretIcon" />
-              <p className="secret-add-text">
-                Add a <span>Folder</span> and then you'll be able to add{" "}
-                <span>Secrets</span> to view them all here
-              </p>
-              <button id="add-secrets-btn" className={select ? "btn-enabled" : "btn-disabled"} disabled={!select} onClick={() => {console.log("Hello")}}>+ Add</button>
-            </div>
+            <div className="zero-secrets">{`${safesList?.safesList?.filter((el) => {
+              if (el.select == true) {
+                {/* console.log(el.secrets.length) */}
+                return el?.secrets?.length;
+              }
+            }).map ((obj)=> {return obj?.secrets?.length})}` == 0 ? 0 : `${safesList?.safesList?.filter((el) => {
+              if (el.select == true) {
+                {/* console.log(el.secrets.length) */}
+                return el.secrets?.length;
+              }
+            }).map ((obj)=> {return obj?.secrets?.length})}`} Secrets</div>
+
+            {safesList?.safesList?.map((el) => {
+              if (el?.select == true && el?.secrets?.length > 0) {
+                return true;
+              } else return false;
+            }).includes(true)  ? (
+              <div className="secret-card-container">
+                {safesList?.safesList?.map((el) => {
+                  if (el.select == true) {
+                    return el?.secrets?.map((secret) => {
+                      return (
+                        <div className="secret-card">
+                          <div className="secret-folder-images">
+                            <img
+                              src={secretFolderIcon}
+                              alt="card-icon"
+                              id="secretFolderIcon"
+                            />
+                            <img
+                              src={secretFolderActiveIcon}
+                              alt="card-icon"
+                              id="secretFolderActiveIcon"
+                            />
+                          </div>
+                          <div className="secret-card-text">
+                            <h4>{secret.secret}</h4>
+                            <p>a few seconds ago</p>
+                          </div>
+                          <img
+                              src={deleteIcon}
+                              alt="delete-icon"
+                              id="secretDeleteIcon"
+                              onClick={() => handleDeleteSecret(secret.id)}
+
+                            />
+                        </div>
+                      );
+                    });
+                  }
+                })}
+              </div>
+            ) : 
+              <div className="secrets-list-box">
+                <img src={secretIcon} alt="secret-Icon" id="secretIcon" />
+                <p className="secret-add-text">
+                  Add a <span>Folder</span> and then you'll be able to add{" "}
+                  <span>Secrets</span> to view them all here
+                </p>
+                <button
+                  id="add-secrets-btn"
+                  className={select ? "btn-enabled" : "btn-disabled"}
+                  disabled={!select}
+                  onClick={() => {
+                    handleModalTempOpen();
+                  }}
+                >
+                  + Add
+                </button>
+              </div>
+            }
           </div>
         </section>
       </article>
@@ -193,9 +295,12 @@ function SafesPage() {
         setSelect={setSelect}
         setShowName={setShowName}
         setShowDesc={setShowDesc}
+        setFilteredArray={setFilteredArray}
       ></Modal>
+      <SecretsModal show={modalTempOpen} handleClose={hideModalTemp} />
     </main>
   );
 }
 
 export default SafesPage;
+

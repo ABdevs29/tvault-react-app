@@ -33,3 +33,10 @@ export const addsecrets = (secret) => {
         payload: secret
     }
 }
+
+export const deletesecrets = (id) => {
+    return {
+        type: 'DELETE_SECRETS',
+        payload: id
+    }
+}

@@ -21,7 +21,7 @@ export default function Navbar() {
             </li>
             <li>
               <Link
-                to="/vault"
+                to="/vault?data=hello"
                 style={{ textDecoration: "none", color: "white" }}
               >
                 <div className="nav-link">Vault AppRoles</div>

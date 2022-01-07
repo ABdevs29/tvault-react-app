@@ -128,13 +128,20 @@ body {
   font-family: "Roboto", sans-serif;
   position: relative;
 }
+.App {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  justify-content: center;
+  align-items: center;
+}
 nav {
   color: white;
   background-color: #151820;
   display: flex;
   width: 100vw;
   height: 4rem;
-  position: fixed;
+  /* position: fixed; */
   box-shadow: 0 0.5rem 2.5rem 0 rgb(226 0 116 / 50%);
 }
 .nav-list {
@@ -144,8 +151,9 @@ nav {
 .nav-container {
   display: flex;
   width: 100%;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: center;
+  padding-left: 15%;
   gap: 1rem;
 }
 .component-headers {
