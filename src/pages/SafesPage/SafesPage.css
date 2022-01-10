@@ -1,400 +1,434 @@
 .safe-page-container {
-    /* position: absolute; */
-    /* top: 7rem; */
-    /* left: 14rem;*/
-    background-color: #242835;
-    height: calc(78vh); /*70vh*/
-    width: 70%; /*70vw*/
-    overflow: auto;
-    display: flex;
-    overflow-y: hidden;
-    /* z-index: 1; */
-  
-    /* padding: 3rem; */
-  }
-  .display-safes {
-    flex: 40%;
-    background: #151820;
-  }
-  .display-secrets {
-    flex: 60%;
-    background-color: 242835;
-  }
-  .display-safes-all-safes {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    gap: 2rem;
-    padding: 0.5rem;
-  }
-  .display-safes-all-safes p {
-    color: white;
-    font-weight: bolder;
-  }
-  span {
-    font-weight: lighter;
-    color: #5e627c;
-  }
-  .search-container {
-    background: #20232e;
-    display: flex;
-    /* padding: 0.3rem 1rem; */
-    align-items: center;
-  }
-  #search-icon {
-    width: 1.5rem;
-    height: 1.5rem;
-  }
-  #search-box-input {
-    background: #20232e;
-    border: 0;
-    caret-color: #5e627c;
-    color: #5e627c;
-    outline: none;
-    width: 50%;
-    font-size: 1rem;
-  }
-  #safe-image {
-    width: 10rem;
-    height: 10rem;
-  }
-  .safe-image-text {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-    margin-top: 2rem;
-    font-size: 0.7rem;
-  }
-  #add-btn-image {
-    margin-top: 2rem;
-    width: 3.5rem;
-    height: 3.5rem;
-    cursor: pointer;
-  }
-  .safes-display-banner {
-    background-image: url(../../images/safe-banner.png);
-    background-repeat: no-repeat;
-    background-size: 100% 100%;
-    background-position: 50%;
-    margin: -.75rem 0 -1rem;
-    height: 10rem;
-    position: relative;
-    /* z-index: 4; */
-  }
-  .secrets-display-box {
-    background: linear-gradient(180deg, #151820, #2c3040);
-    padding: 2rem;
-    height: calc(100% - 12.25rem);
-  }
-  .safes-display-caption {
-      position: absolute;
-      color: white;
-      top: 4rem;
-      left: 14.2rem;
-      right: 4.5rem;
-      white-space: pre;
-      font-size: 1.3rem;
-      width: 14rem;
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
-  }
-  .safes-display-para {
-      position: absolute;
-      top: 6rem;
-      left: 14.2rem;
-      right: 4.5rem;
-      font-size: .8rem;
-      color: #c4c4c4;
-      /* display: -webkit-box; */
-      width: 14rem;
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
-      /* overflow: hidden; */
-      /* -webkit-line-clamp: 3; */
-      /* -webkit-box-orient: vertical; */
-  }
-  .secret-card-text h4 {
-    width: 16rem;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-  }
-  .secrets-display-box-banner {
-      color: white;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      border-bottom: .1rem solid #222632;
-      height: 1.8rem;
-  }
-  #addSecretsBtn {
-      height: 1.4rem;
-      width: 1.4rem;
-      cursor: pointer;
-  }
-  #secretIcon {
-      height: 7rem;
-      width: 7rem; 
-  }
-  .secrets-list-box {
-      overflow: auto;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      gap: 1rem;
-      /* padding-top: 3rem; */
-      /* height: 8.5rem; */
-      height: 80%;
-  }
-  .secret-add-text {
-      color: white;
-      font-size: .75rem;
-      width: 45%;
-      text-align: center;
-  }
-  #add-secrets-btn {
-      font-weight: 700;
-      font-size: 1rem;
-      border: none;
-      padding: .3rem 1rem;
-      cursor: pointer;
-      /* background-color: #e20074; */
-      /* color: #fff; */
-      margin-left: 1rem;
-  }
-  .btn-enabled {
-    background: #e20074;
-    color: #fff;
-  }
-  .btn-disabled {
-    background: #454c5e;
-    color: #fff;
-  }
-  .zero-secrets{
-      font-size: .8rem;
-      margin: 0.3rem 0;
-      color: #5e627c;
-  }
-  #safe-icon {
-      height: 4rem;
-  }
-  .safe-icon-container {
-      color: #9CB8C4;
-      display: flex;
-      padding-left: 3rem;
-      gap: 1rem;
-      justify-content: center;
-      align-items: center;
-  }
-  h2 {
-      padding-left: 3rem;
-      padding-top: 2rem;
-      padding-bottom: 2rem;
-  }
-  .safe-input-box{
-      display: flex;
-      flex-direction: column;
-      padding-left: 3rem;
+  /* position: absolute; */
+  /* top: 7rem; */
+  /* left: 14rem;*/
+  background-color: #242835;
+  height: calc(78vh); /*70vh*/
+  width: 80%; /*70vw*/
+  overflow: auto;
+  display: flex;
+  overflow-y: hidden;
+  padding: 1rem;
+  /* z-index: 1; */
 
-  }
-  .modal-full {
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-  }
-  input {
-      width: 11rem;
-  }
-  select {
-      width: 11rem;
-  }
-  .safe-list-logo-name{
-    display: flex;
-    gap: 1.5rem;
-  }
-  .safe-list-display-card {
-    height: 4rem;
-    /* background: linear-gradient(
+  /* padding: 3rem; */
+}
+.display-safes {
+  flex: 40%;
+  background: #151820;
+  position: relative;
+}
+.display-safes section {
+  height: 100%;
+}
+.display-secrets {
+  flex: 60%;
+  background-color: 242835;
+}
+.display-safes-all-safes {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 2rem;
+  padding: 0.5rem;
+  height: 6%;
+}
+.display-safes-all-safes p {
+  color: white;
+  font-weight: bolder;
+  margin-left: 0.7rem;
+  font-size: 0.9rem;
+}
+span {
+  font-weight: lighter;
+  color: #5e627c;
+}
+.search-container {
+  background: #20232e;
+  display: flex;
+  /* padding: 0.3rem 1rem; */
+  align-items: center;
+  padding: 0.3rem;
+}
+#search-icon {
+  width: 1.2rem;
+  height: 1.2rem;
+}
+#search-box-input {
+  background: #20232e;
+  border: 0;
+  caret-color: #5e627c;
+  color: #5e627c;
+  outline: none;
+  width: 100%;
+  font-size: 0.8rem;
+}
+#safe-image {
+  width: 10rem;
+  height: 10rem;
+}
+.safe-image-text {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  margin-top: 30%;
+  font-size: 0.7rem;
+  /* position: relative; */
+}
+.safe-list-display-card-container-wrapper {
+  height: 90%;
+}
+#add-btn-image {
+  margin-top: 2rem;
+  width: 3.5rem;
+  height: 3.5rem;
+  cursor: pointer;
+  position: absolute;
+  top: 70%;
+}
+.safes-display-banner {
+  background-image: url(../../images/safe-banner.png);
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+  background-position: 50%;
+  margin: -0.325rem -0rem -1rem;
+  height: 8rem;
+  position: relative;
+  /* z-index: 4; */
+}
+.secrets-display-box {
+  background: linear-gradient(180deg, #151820, #2c3040);
+  padding: 2rem;
+  height: calc(100% - 10.68rem);
+}
+.safes-display-caption {
+  position: absolute;
+  color: white;
+  top: 2rem;
+  left: 30%;
+  right: 4.5rem;
+  white-space: pre;
+  font-size: 1.3rem;
+  width: 14rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.safes-display-para {
+  position: absolute;
+  top: 4rem;
+  left: 30%;
+  right: 4.5rem;
+  font-size: 0.8rem;
+  color: #c4c4c4;
+  /* display: -webkit-box; */
+  width: 14rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  /* overflow: hidden; */
+  /* -webkit-line-clamp: 3; */
+  /* -webkit-box-orient: vertical; */
+}
+.secret-card-text h4 {
+  width: 16rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.secrets-display-box-banner {
+  color: white;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 0.1rem solid #222632;
+  height: 1.8rem;
+}
+#addSecretsBtn {
+  height: 1.4rem;
+  width: 1.4rem;
+  cursor: pointer;
+}
+#secretIcon {
+  height: 7rem;
+  width: 7rem;
+}
+.secrets-list-box {
+  overflow: auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+  /* padding-top: 3rem; */
+  /* height: 8.5rem; */
+  height: 80%;
+}
+.secret-add-text {
+  color: white;
+  font-size: 0.75rem;
+  width: 45%;
+  text-align: center;
+}
+#add-secrets-btn {
+  font-weight: 700;
+  font-size: 1rem;
+  border: none;
+  padding: 0.3rem 1rem;
+  cursor: pointer;
+  /* background-color: #e20074; */
+  /* color: #fff; */
+  margin-left: 1rem;
+}
+.btn-enabled {
+  background: #e20074;
+  color: #fff;
+}
+.btn-disabled {
+  background: #454c5e;
+  color: #fff;
+}
+.zero-secrets {
+  font-size: 0.8rem;
+  margin: 0.3rem 0;
+  color: #5e627c;
+}
+#safe-icon {
+  height: 4rem;
+}
+.safe-icon-container {
+  color: #9cb8c4;
+  display: flex;
+  padding-left: 3rem;
+  gap: 1rem;
+  justify-content: center;
+  align-items: center;
+}
+h2 {
+  padding-left: 3rem;
+  padding-top: 2rem;
+  padding-bottom: 2rem;
+}
+.safe-input-box {
+  display: flex;
+  flex-direction: column;
+  padding-left: 3rem;
+}
+.modal-full {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+input {
+  width: 11rem;
+}
+select {
+  width: 11rem;
+}
+.safe-list-logo-name {
+  display: flex;
+  gap: 0.7rem;
+}
+.safe-list-display-card {
+  height: 4rem;
+  /* background: linear-gradient(
       90deg,#72134b,#1d212c); */
-    display: flex;
-    justify-content: space-between;
-    padding-left: 1.5rem;
-    padding-right: 1.5rem;
-    align-items: center;
-    font-size: .9rem;
-    color: white;
-    cursor: pointer;
-  }
-  .safe-list-display-card-select {
-    height: 4rem;
-    background: linear-gradient(
-      90deg,#72134b,#1d212c);
-    display: flex;
-    justify-content: space-between;
-    padding-left: 1.5rem;
-    padding-right: 1.5rem;;
-    align-items: center;
-    font-size: .9rem;
-    cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  padding-left: 1.15rem;
+  padding-right: 0.5rem;
+  align-items: center;
+  font-size: 0.9rem;
+  color: white;
+  cursor: pointer;
+}
+.safe-list-display-card-select {
+  height: 4rem;
+  background: linear-gradient(90deg, #72134b, #1d212c);
+  display: flex;
+  justify-content: space-between;
+  padding-left: 1.15rem;
+  padding-right: 0.5rem;
+  align-items: center;
+  font-size: 0.9rem;
+  cursor: pointer;
 
-    color: white;
-  }
-  .edit-delete-container {
-    display: flex;
-    gap: 1rem;
-  }
-  .safe-list-display-card-container {
-    height: 18rem;
-  }
-  .safe-list-name-display-box {
-    display: flex;
-    flex-direction: column;
-    gap: .5rem;
-  }
-  .safe-list-name-display-box div:first-child {
-    width: 9rem;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-  }
-  #last-updated {
-    color: #5e627c;
-    font-size: .8rem;
-  }
-  #safeIcon {
-    height: 2rem;
-    width: 2rem;
-  }
-  #editIcon {
-    height: 1rem;
-    width: 1rem;
-    cursor: pointer;
-  }
-  #deleteIcon {
-    height: 1rem;
-    width: 1rem;
-    cursor: pointer;
-  }
-  .add-btn-container {
-    /* width: 90%; */
-    /* display: flex; */
-    /* justify-content: flex-end; */
+  color: white;
+}
+.edit-delete-container {
+  display: flex;
+  gap: 1rem;
+}
+.safe-list-display-card-container {
+  height: 100%;
+  overflow-y: auto;
+}
+.safe-list-name-display-box {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+.safe-list-name-display-box div:first-child {
+  width: 9rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+#last-updated {
+  color: #5e627c;
+  font-size: 0.8rem;
+}
+#safeIcon {
+  height: 2rem;
+  width: 2rem;
+}
+#editIcon {
+  height: 1rem;
+  width: 1rem;
+  cursor: pointer;
+}
+#deleteIcon {
+  height: 1rem;
+  width: 1rem;
+  cursor: pointer;
+}
+.add-btn-container {
+  width: 90%;
+  display: flex;
+  justify-content: flex-end;
+}
 
-  }
-  .secrets-form {
-    display: flex;
-    flex-direction: column;
-    padding: 3rem;
-    gap: 1rem;
-  }
-  .secrets-form h1 {
-    font-size: 1.3rem;
-  }
-  .folder-name-input {
-    display: flex;
-    flex-direction: column;
-    gap: .4rem;
-    margin-top: 2rem;
-  }
-  .folder-name-input label {
-    font-size: .8rem;
-  }
-  .folder-name-input input {
-    outline: none;
-    display: block;
-    width: 90%;
-    padding: .6rem;
-    font-size: 1.1rem;
-  }
-  .secrets-form p {
-    font-size: .8rem;
-    color: #8b8ea6;
-  }
-  .close-btn {
-    width: 7rem;
-    font-weight: 700;
-    font-size: 0.9rem;
-    border: none;
-    padding: .5rem 1.3rem;
-    cursor: pointer;
-    background: #fff;
-    color: #e20074;
-  }
-  .create-btn {
-    width: 7rem;
-    font-weight: 700;
-    font-size: 0.9rem;
-    border: none;
-    padding: .5rem 1.3rem;
-    cursor: pointer;
-  }
-  .btn-group-secrets-form {
-      display: flex;
-      justify-content: flex-end;
-      gap: 1rem;
-      margin-top: .5rem;
-  }
-  #secretFolderIcon {
-    height: 1.7rem;
-    width: 1.7rem;
-  }
-  #secretFolderActiveIcon {
-    height: 1.8rem;
-    width: 1.8rem;
-    display: none;
-  }
-  .secret-card-container {
-    display: flex;
-    flex-direction: column;
-  }
-  .secret-card {
-    display: flex;
-    height: 3rem;
-    width: 100%;
-    background: #1c1f29;
-    justify-content: flex-start;
-    align-items: center;
-    gap: 1rem;
-    padding-left: 1rem;
-    cursor: pointer;
-
-  }
-  .secret-card h4 {
-    color: white;
-    font-size: .9rem;
-  }
-  .secret-card div {
-    color: #5e627c;
-    font-size: .7rem;
-
-  }
-  .secret-card:hover {
-    background: linear-gradient(
-      90deg,#72134b,#1d212c);
-  }
-  .secret-card:hover #secretFolderIcon {
-    display: none;
-  }
-  .secret-card:hover #secretFolderActiveIcon {
-    display: block;
-  }
-  #secretDeleteIcon {
-    height: 1rem;
-    width: 1rem;
-    cursor: pointer;
-    margin-left: 25%;
-    display: none;
-  }
-  .secret-card:hover #secretDeleteIcon {
-    display: block;
-  }
-  .not-found-text {
-    text-align: center;
-    color: #5e627c;
-    margin-top: 3rem;
-  }
+.secrets-form {
+  display: flex;
+  flex-direction: column;
+  padding: 3rem;
+  gap: 1rem;
+}
+.secrets-form h1 {
+  font-size: 1.3rem;
+}
+.folder-name-input {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  margin-top: 2rem;
+}
+.folder-name-input label {
+  font-size: 0.8rem;
+}
+.folder-name-input input {
+  outline: none;
+  display: block;
+  width: 95.5%;
+  padding: 0.6rem;
+  font-size: 1.1rem;
+}
+.secrets-form p {
+  font-size: 0.8rem;
+  color: #8b8ea6;
+}
+.close-btn {
+  width: 7rem;
+  font-weight: 700;
+  font-size: 0.9rem;
+  border: none;
+  padding: 0.5rem 1.3rem;
+  cursor: pointer;
+  background: #fff;
+  color: #e20074;
+}
+.create-btn {
+  width: 7rem;
+  font-weight: 700;
+  font-size: 0.9rem;
+  border: none;
+  padding: 0.5rem 1.3rem;
+  cursor: pointer;
+}
+.btn-group-secrets-form {
+  display: flex;
+  justify-content: flex-end;
+  gap: 1rem;
+  margin-top: 0.5rem;
+}
+#secretFolderIcon {
+  height: 1.7rem;
+  width: 1.7rem;
+}
+#secretFolderActiveIcon {
+  height: 1.8rem;
+  width: 1.8rem;
+  display: none;
+}
+.secrets-container {
+  height: 90%;
+  overflow-y: auto;
+}
+.secret-card-container {
+  display: flex;
+  flex-direction: column;
+}
+.secret-card {
+  display: flex;
+  height: 3rem;
+  /* width: 100%; */
+  background: #1c1f29;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 1rem;
+  padding-left: 1rem;
+  cursor: pointer;
+}
+.secret-card h4 {
+  color: white;
+  font-size: 0.9rem;
+}
+.secret-card div {
+  color: #5e627c;
+  font-size: 0.7rem;
+}
+.secret-card:hover {
+  background: linear-gradient(90deg, #72134b, #1d212c);
+}
+.secret-card:hover #secretFolderIcon {
+  display: none;
+}
+.secret-card:hover #secretFolderActiveIcon {
+  display: block;
+}
+#secretDeleteIcon {
+  height: 1rem;
+  width: 1rem;
+  cursor: pointer;
+  margin-left: auto;
+  margin-right: 0.3rem;
+  display: none;
+}
+.secret-card:hover #secretDeleteIcon {
+  display: block;
+}
+.not-found-text {
+  text-align: center;
+  color: #5e627c;
+  margin-top: 3rem;
+}
+.btn-enabled {
+  background: #e20074;
+  color: #fff;
+}
+.btn-disabled {
+  background: #454c5e;
+  color: #fff;
+}
+::-webkit-scrollbar {
+  height: 0.7rem;
+  width: 0.5rem;
+  border: 1px solid #72134b;
+  border-radius: 18px;
+}
+::-webkit-scrollbar-thumb {
+  background: #72134b;
+  border-radius: 18px;
+}

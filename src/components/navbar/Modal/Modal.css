@@ -12,7 +12,7 @@
     position:fixed;
     background: #2A2E3E;
     width: 40%;
-    height: 100%;
+    height: max-content ;
     top:50%;
     left:50%;
     transform: translate(-50%,-50%);
@@ -33,17 +33,33 @@
   .safe-input-box input {
     width: 80%;
     height: 1.5rem;
+    outline: none;
+    display: block;
+    /* width: 100%; */
+    padding: 0.25rem;
+    /* margin-top: 0.8rem; */
+    font-size: .9rem;
   }
   .safe-input-box textarea {
     width: 80%;
     height: 3rem;
+    outline: none;
+    display: block;
+    padding: 0.25rem;
+    font-size: .9rem;
+
   }
   .safe-input-box select {
-    width: 81.5%;
-    height: 1.5rem;
+    width: 82%;
+    height: 1.6rem;
+    outline: none;
+    display: block;
+    padding: 0.25rem;
+    font-size: .9rem;
   }
   .safe-icon-container{
-    padding-right: 3rem;
+    /* padding-right: 3rem; */
+    width: 81%;
     font-size: .9rem;
   }
   .safe-icon-container p{
@@ -80,7 +96,7 @@
     gap: 1rem;
     padding: 3rem;
     padding-top: 1rem;
-    padding-bottom: 1rem;
+    padding-bottom: 2rem;
     /* margin-bottom: 1rem; */
   }
   .btn-enabled {

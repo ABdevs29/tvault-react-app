@@ -18,11 +18,19 @@ const reducer = (initialState = [], action) => {
       ];
     case "EDIT_SAFE":
       return initialState.map((el) => {
-        console.log(action.payload, "action.payload")
+        console.log(action.payload, "action.payload");
         if (el.id === action.payload.id) {
-          return { ...action.payload, createdAt: new Date(), select: true };
+          return {
+            ...el,
+            safeName: action.payload.safeName,
+            safeOwner: action.payload.safeOwner,
+            safeType: action.payload.safeType,
+            safeDesc: action.payload.safeDesc,
+            createdAt: new Date(),
+            select: true,
+          };
         } else {
-          return {...el, select: false};
+          return { ...el, select: false };
         }
       });
     case "DELETE_SAFE":
@@ -42,7 +50,7 @@ const reducer = (initialState = [], action) => {
     case "ADD_SECRETS":
       return initialState.map((el) => {
         if (el.select === true) {
-          return { ...el, secrets: [...el.secrets, { ...action.payload }] };
+          return { ...el, secrets: [...el?.secrets, { ...action.payload }] };
         } else {
           return el;
         }
@@ -51,13 +59,16 @@ const reducer = (initialState = [], action) => {
       return initialState.map((el) => {
         if (el.select === true) {
           console.log(el);
-          return {...el, secrets: el.secrets.filter((secret) => {
-            console.log(secret);
-            if (secret.id !== action.payload) {
+          return {
+            ...el,
+            secrets: el.secrets.filter((secret) => {
               console.log(secret);
-              return secret;
-            }
-          }) }
+              if (secret.id !== action.payload) {
+                console.log(secret);
+                return secret;
+              }
+            }),
+          };
         } else {
           return el;
         }

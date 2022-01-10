@@ -153,8 +153,8 @@ nav {
   width: 100%;
   justify-content: flex-start;
   align-items: center;
-  padding-left: 15%;
-  gap: 1rem;
+  padding-left: 10%;
+  gap: 0.5rem;
 }
 .component-headers {
   color: white;
@@ -187,5 +187,13 @@ nav {
   top: 5rem;
   height: calc(100vh - 15rem);
 }
-
-
+#documentIcon {
+  background-color: thistle;
+  height: 1rem;
+  width: 1rem;
+}
+.document-link-container {
+  display: flex;
+  gap: 0.4rem;
+  cursor: pointer;
+}

@@ -32,7 +32,7 @@ function SafesPage() {
   const [select, setSelect] = useState(false);
 
   const safesList = useSelector((safesList) => safesList);
-  const [filteredArray, setFilteredArray] = useState([...safesList.safesList])
+  const [filteredArray, setFilteredArray] = useState([...safesList.safesList]);
   // console.log(safesList);
   const dispatch = useDispatch();
 
@@ -93,24 +93,26 @@ function SafesPage() {
     console.log(id);
     const payload = id;
     dispatch({ type: "DELETE_SECRETS", payload });
-  }
+  };
 
   const filter = (data, value) => {
     if (value == "") {
       setFilteredArray(data.safesList);
     } else {
-      const result = [...data.safesList.filter((el) => {
-        if (el.safeName.toLowerCase().includes(value)) {
-          el.select = true;
-        console.log(el)
-          return el;
-        } else {
-          el.select = false;
-        }
-      })]
+      const result = [
+        ...data.safesList.filter((el) => {
+          if (el.safeName.toLowerCase().includes(value)) {
+            el.select = true;
+            console.log(el);
+            return el;
+          } else {
+            el.select = false;
+          }
+        }),
+      ];
       setFilteredArray(result);
     }
-  }
+  };
   // const safesList.safesList = filter(safesList.safesList, search.toLowerCase());
   return (
     <main className="safe-page-container">
@@ -118,7 +120,14 @@ function SafesPage() {
         <section>
           <div className="display-safes-all-safes">
             <p>
-              All Safes <span>({search == "" ? safesList?.safesList?.length : filteredArray?.length})</span>
+              All Safes{" "}
+              <span>
+                (
+                {search == ""
+                  ? safesList?.safesList?.length
+                  : filteredArray?.length}
+                )
+              </span>
             </p>
             <div className="search-container">
               <img
@@ -132,8 +141,10 @@ function SafesPage() {
                 id="search-box-input"
                 placeholder="Search"
                 value={search}
-                onChange={(e) => {filter(safesList, e.target.value); setSearch(e.target.value);}}
-
+                onChange={(e) => {
+                  filter(safesList, e.target.value);
+                  setSearch(e.target.value);
+                }}
               />
             </div>
           </div>
@@ -149,21 +160,36 @@ function SafesPage() {
               />
             </div>
           ) : (
-            <div>
+            <div className="safe-list-display-card-container-wrapper">
               <div className="safe-list-display-card-container">
-              {
-                console.log(filteredArray)
-              }
-                {search=="" ? safesList.safesList.map((el) => {
-                  
-                  return (
-                    <SafesCardTemplate el={el} handleSelectSafe={handleSelectSafe} handleEditSafe={handleEditSafe} setSelect={setSelect} handleDeleteSafe={handleDeleteSafe} />
-                  );
-                }) : filteredArray?.length == 0 ? <div className="not-found-text">No Safe found!</div> :filteredArray.map((el) => {
-                  return (
-                    <SafesCardTemplate el={el} handleSelectSafe={handleSelectSafe} handleEditSafe={handleEditSafe} setSelect={setSelect} handleDeleteSafe={handleDeleteSafe} />
-                  );
-                }) }
+                {console.log(filteredArray)}
+                {search == "" ? (
+                  safesList.safesList.map((el) => {
+                    return (
+                      <SafesCardTemplate
+                        el={el}
+                        handleSelectSafe={handleSelectSafe}
+                        handleEditSafe={handleEditSafe}
+                        setSelect={setSelect}
+                        handleDeleteSafe={handleDeleteSafe}
+                      />
+                    );
+                  })
+                ) : filteredArray?.length == 0 ? (
+                  <div className="not-found-text">No Safe found!</div>
+                ) : (
+                  filteredArray.map((el) => {
+                    return (
+                      <SafesCardTemplate
+                        el={el}
+                        handleSelectSafe={handleSelectSafe}
+                        handleEditSafe={handleEditSafe}
+                        setSelect={setSelect}
+                        handleDeleteSafe={handleDeleteSafe}
+                      />
+                    );
+                  })
+                )}
               </div>
               <div className="add-btn-container">
                 <img
@@ -183,20 +209,37 @@ function SafesPage() {
       <article className="display-secrets">
         <div className="safes-display-banner">
           <div className="safes-display-caption">
-            {select && safesList?.safesList?.length !== 0  ? showName : "No Safes Created Yet"}
+            {select && safesList?.safesList?.length !== 0
+              ? showName
+              : "No Safes Created Yet"}
           </div>
-          <div className="safes-display-para">
-            {select && safesList?.safesList?.length !== 0 
+          <div
+            className="safes-display-para"
+            style={
+              !select
+                ? {
+                    overflow: "visible",
+                    textOverflow: "clip",
+                    whiteSpace: "normal",
+                  }
+                : {}
+            }
+          >
+            {select && safesList?.safesList?.length !== 0
               ? showDesc
               : "Create a safe to see your secrets, folders and perm"}
           </div>
         </div>
         <section className="secrets-display-box">
-          <div className="secrets-display-box-banner"> 
+          <div className="secrets-display-box-banner">
             <div>Secrets</div>
             <div>
               <img
-                src={select && safesList?.safesList?.length !==0 ? addSecretsBtnEnabled : addSecretsBtnDisabled}
+                src={
+                  select && safesList?.safesList?.length !== 0
+                    ? addSecretsBtnEnabled
+                    : addSecretsBtnDisabled
+                }
                 alt="add-folder"
                 id="addSecretsBtn"
                 disabled={!select}
@@ -204,24 +247,43 @@ function SafesPage() {
               />
             </div>
           </div>
-          <div>
-            <div className="zero-secrets">{`${safesList?.safesList?.filter((el) => {
-              if (el.select == true) {
-                {/* console.log(el.secrets.length) */}
-                return el?.secrets?.length;
-              }
-            }).map ((obj)=> {return obj?.secrets?.length})}` == 0 ? 0 : `${safesList?.safesList?.filter((el) => {
-              if (el.select == true) {
-                {/* console.log(el.secrets.length) */}
-                return el.secrets?.length;
-              }
-            }).map ((obj)=> {return obj?.secrets?.length})}`} Secrets</div>
+          <div className="secrets-container">
+            <div className="zero-secrets">
+              {`${safesList?.safesList
+                ?.filter((el) => {
+                  if (el.select == true) {
+                    {
+                      /* console.log(el.secrets.length) */
+                    }
+                    return el?.secrets?.length;
+                  }
+                })
+                .map((obj) => {
+                  return obj?.secrets?.length;
+                })}` == 0
+                ? 0
+                : `${safesList?.safesList
+                    ?.filter((el) => {
+                      if (el.select == true) {
+                        {
+                          /* console.log(el.secrets.length) */
+                        }
+                        return el.secrets?.length;
+                      }
+                    })
+                    .map((obj) => {
+                      return obj?.secrets?.length;
+                    })}`}{" "}
+              Secrets
+            </div>
 
-            {safesList?.safesList?.map((el) => {
-              if (el?.select == true && el?.secrets?.length > 0) {
-                return true;
-              } else return false;
-            }).includes(true)  ? (
+            {safesList?.safesList
+              ?.map((el) => {
+                if (el?.select == true && el?.secrets?.length > 0) {
+                  return true;
+                } else return false;
+              })
+              .includes(true) ? (
               <div className="secret-card-container">
                 {safesList?.safesList?.map((el) => {
                   if (el.select == true) {
@@ -245,19 +307,18 @@ function SafesPage() {
                             <p>a few seconds ago</p>
                           </div>
                           <img
-                              src={deleteIcon}
-                              alt="delete-icon"
-                              id="secretDeleteIcon"
-                              onClick={() => handleDeleteSecret(secret.id)}
-
-                            />
+                            src={deleteIcon}
+                            alt="delete-icon"
+                            id="secretDeleteIcon"
+                            onClick={() => handleDeleteSecret(secret.id)}
+                          />
                         </div>
                       );
                     });
                   }
                 })}
               </div>
-            ) : 
+            ) : (
               <div className="secrets-list-box">
                 <img src={secretIcon} alt="secret-Icon" id="secretIcon" />
                 <p className="secret-add-text">
@@ -275,7 +336,7 @@ function SafesPage() {
                   + Add
                 </button>
               </div>
-            }
+            )}
           </div>
         </section>
       </article>
@@ -303,4 +364,3 @@ function SafesPage() {
 }
 
 export default SafesPage;
-

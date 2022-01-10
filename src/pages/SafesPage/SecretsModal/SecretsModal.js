@@ -5,6 +5,7 @@ import ModalTemp from "../../../components/navbar/ModalTemplate/ModalTemp";
 function SecretsModal({ show, handleClose }) {
   const [secret, setSecret] = useState("");
   const dispatch = useDispatch();
+  const buttonEnabled = secret.match(/^[a-z0-9_]{3,100}$/) ? "btn-enabled" : "btn-disabled";
 
   const handleSave = () => {
     const payload = {
@@ -15,6 +16,12 @@ function SecretsModal({ show, handleClose }) {
     handleClose();
     setSecret("");
   };
+
+  const validateSecretName = () => {
+    if (secret.match(/^[a-z0-9_]{3,100}$/)) {
+      handleSave();
+    }
+  }
   return (
     <ModalTemp show={show}>
       <form className="secrets-form">
@@ -24,6 +31,7 @@ function SecretsModal({ show, handleClose }) {
           <input
             type="text"
             id="folderName"
+            placeholder="Enter secret here"
             value={secret}
             onChange={(e) => setSecret(e.target.value)}
           />
@@ -40,7 +48,7 @@ function SecretsModal({ show, handleClose }) {
           >
             Cancel
           </button>
-          <button className="create-btn" type="button" onClick={() => handleSave()}>
+          <button className={buttonEnabled} id="create-btn" type="button"  onClick={() => validateSecretName()}>
             Save
           </button>
         </div>

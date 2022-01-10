@@ -12,7 +12,7 @@
     position:fixed;
     background: #2A2E3E;
     width: 45%;
-    height: 55%;
+    height: max-content;
     top:50%;
     left:50%;
     transform: translate(-50%,-50%);

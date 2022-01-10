@@ -19,15 +19,29 @@ const Modal = ({
   setSelect,
   setShowName,
   setShowDesc,
-  setFilteredArray
+  setFilteredArray,
 }) => {
   const showHideClassName = show ? "modal display-block" : "modal display-none";
-  const buttonEnabled = safeName=="" || safeOwner=="" || safeType=="" || safeDesc.length < 10 ? "btn-disabled" : "btn-enabled";
-
+  const buttonEnabled =
+    safeName == "" || safeOwner == "" || safeType == "" || safeDesc.length < 10
+      ? "btn-disabled"
+      : "btn-enabled";
 
   const dispatch = useDispatch();
   const safesList = useSelector((safesList) => safesList);
 
+  const validateSafeName = (id) => {
+    console.log(safesList, id)
+    if (safesList?.safesList?.length == safesList?.safesList?.filter((el) => el.safeName.toLowerCase() !== safeName.toLowerCase()).length) {
+      if (id == undefined) {  
+        handleAddData();
+      } else {
+        handleEditData(id)
+      }
+    } else {
+      alert("Safe name is already used! Choose a different safe name.")
+    }
+  }
   const handleAddData = () => {
     console.log(safeName, safeOwner, safeType, safeDesc);
     setSelect(true);
@@ -45,7 +59,7 @@ const Modal = ({
     setSafeOwner("");
     setSafeType("Personal");
     setSafeDesc("");
-    setFilteredArray([...safesList.safesList])
+    setFilteredArray([...safesList.safesList]);
   };
 
   const handleEditData = (id) => {
@@ -59,7 +73,7 @@ const Modal = ({
       safeType,
       safeDesc,
     };
-    console.log(payload, "payload")
+    console.log(payload, "payload");
     dispatch({ type: "EDIT_SAFE", payload });
     handleClose();
     setSafeName("");
@@ -132,10 +146,11 @@ const Modal = ({
             <button
               type="button"
               onClick={() => {
-                handleEditData(editId);
+                validateSafeName(editId);
+                // handleEditData(editId);
               }}
               className={buttonEnabled}
-              disabled={buttonEnabled == "btn-disabled" ? true: false}
+              disabled={buttonEnabled == "btn-disabled" ? true : false}
               id="create-btn"
             >
               Update
@@ -144,10 +159,10 @@ const Modal = ({
             <button
               type="button"
               onClick={() => {
-                handleAddData();
+                validateSafeName();
               }}
               className={buttonEnabled}
-              disabled={buttonEnabled == "btn-disabled" ? true: false}
+              disabled={buttonEnabled == "btn-disabled" ? true : false}
               id="create-btn"
             >
               + Create
