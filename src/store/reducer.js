@@ -33,12 +33,19 @@ const reducer = (initialState = [], action) => {
           return { ...el, select: false };
         }
       });
-    case "DELETE_SAFE":
-      return initialState.filter((el) => {
+    case "DELETE_SAFE": //TODO
+      const updatedState = initialState.filter((el) => {
         if (el.id !== action.payload) {
           return el;
         }
       });
+      return updatedState.map((el, index) => {
+        if (index == 0) {
+          return {...el, select: true}
+        } else {
+          return el;
+        }
+      })
     case "SELECT_SAFE":
       return initialState.map((el) => {
         if (el.id == action.payload) {

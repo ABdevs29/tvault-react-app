@@ -86,7 +86,7 @@ const Modal = ({
     <div className={showHideClassName}>
       <section className="modal-main">
         <h2>{edit ? "Update" : "Create"} Safe</h2>
-        <div className="safe-icon-container">
+        <div className="safe-icon-container-modal">
           <img src={safeIcon} alt="safe-icon" id="safe-icon" />
           <p>
             A Safe is a logical unit to store the secrets. All the safes are
@@ -95,27 +95,29 @@ const Modal = ({
             content of the safe.
           </p>
         </div>
-        <div className="safe-input-box">
+        <div className="safe-input-box-modal">
           <label htmlFor="safe-name">Safe Name</label>
           <input
             type="text"
             id="safe-name"
+            className="safe-name"
             placeholder="Enter your Safe name"
             value={safeName}
             onChange={(e) => setSafeName(e.target.value)}
           />
         </div>
-        <div className="safe-input-box">
-          <label htmlFor="safe-name">Owner</label>
+        <div className="safe-input-box-modal">
+          <label htmlFor="safe-owner">Owner</label>
           <input
             type="text"
             id="safe-name"
+            className="safe-owner"
             placeholder="Enter your Owner name"
             value={safeOwner}
             onChange={(e) => setSafeOwner(e.target.value)}
           />
         </div>
-        <div className="safe-input-box">
+        <div className="safe-input-box-modal">
           <label htmlFor="safe-type">Type</label>
           <select
             name="safe-type"
@@ -127,7 +129,7 @@ const Modal = ({
             <option value="Others">Others</option>
           </select>
         </div>
-        <div className="safe-input-box">
+        <div className="safe-input-box-modal">
           <label htmlFor="safe-name">Description</label>
           <textarea
             type="text"

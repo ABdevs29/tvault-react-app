@@ -3,7 +3,7 @@ import safeIcon from "../../images/safe-icon.png";
 import editIcon from "../../images/edit.png";
 import deleteIcon from "../../images/delete.png";
 
-export default function SafesCardTemplate({el, handleSelectSafe, handleEditSafe, setSelect, handleDeleteSafe}) {
+export default function SafesCardTemplate({el, handleSelectSafe, handleEditSafe, setSelect, handleDeleteSafe,setShowName, setShowDesc}) {
   return <div
     className={el.select
       ? "safe-list-display-card-select"
@@ -33,6 +33,8 @@ export default function SafesCardTemplate({el, handleSelectSafe, handleEditSafe,
         id="deleteIcon"
         onClick={() => {
           setSelect(false);
+          setShowName("");
+          setShowDesc("");
           handleDeleteSafe(el.id);
         }} />
     </div>

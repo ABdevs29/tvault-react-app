@@ -77,6 +77,8 @@ function SafesPage() {
     // const result = safesList.safesList.filter((el)=> el.id!== id);
     const payload = id;
     dispatch({ type: "DELETE_SAFE", payload });
+    // const payload1 = id-1;
+    // dispatch({ type: "SELECT_SAFE", payload1 });
   };
 
   const handleSelectSafe = (id) => {
@@ -155,7 +157,7 @@ function SafesPage() {
               <img
                 src={addBtn}
                 alt="add"
-                id="add-btn-image"
+                id="add-btn-image-1"
                 onClick={handleModalOpen}
               />
             </div>
@@ -172,6 +174,8 @@ function SafesPage() {
                         handleEditSafe={handleEditSafe}
                         setSelect={setSelect}
                         handleDeleteSafe={handleDeleteSafe}
+                        setShowName={setShowName}
+                        setShowDesc={setShowDesc}
                       />
                     );
                   })
@@ -210,7 +214,7 @@ function SafesPage() {
         <div className="safes-display-banner">
           <div className="safes-display-caption">
             {select && safesList?.safesList?.length !== 0
-              ? showName
+              ? safesList?.safesList?.filter((el) => el.select == true)[0]?.safeName
               : "No Safes Created Yet"}
           </div>
           <div
@@ -226,8 +230,8 @@ function SafesPage() {
             }
           >
             {select && safesList?.safesList?.length !== 0
-              ? showDesc
-              : "Create a safe to see your secrets, folders and perm"}
+              ? safesList?.safesList?.filter((el) => el.select == true)[0]?.safeDesc
+              : "Create a safe to see your secrets, folders and permissions here"}
           </div>
         </div>
         <section className="secrets-display-box">
